@@ -35,7 +35,7 @@ class HealthInformation(models.Model):
     i_smoke = models.CharField(max_length=250, verbose_name="是否吸烟")
     i_drink = models.CharField(max_length=250, verbose_name="是否饮酒")
     i_sport = models.CharField(max_length=250, verbose_name="是否运动")
-    i_user = models.ForeignKey(UserInfo, verbose_name="消息")
+    i_user = models.ForeignKey(UserInfo, on_delete=models.CASCADE, verbose_name="消息")
 
     class Meta:
         verbose_name = "健康信息"

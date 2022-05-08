@@ -1,1 +1,1 @@
-vresion-1.0 配置了django基本信息，创建了用户个人信息和健康信息的models
+vresion-2.0 实现注册于登录功能
