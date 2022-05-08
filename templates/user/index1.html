@@ -3,7 +3,6 @@
 {% block head %}
     <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="/static/js/slide.js"></script>
-
     <style type="text/css">
         .Content-Main{
             max-width: 700px;
@@ -96,9 +95,6 @@
             width: 70%;
             padding: 5px 0px 0px 5px;
         }
-        .error_tip {
-            float:left;foint-size:1px;height:30px;line-height:30px;margin-left:70px;color:#e62e2e;
-        }
         .Content-Main .button{
             padding: 8px 24px 8px 24px;
             margin-bottom: 8px;
@@ -120,154 +116,6 @@
             background-color:  #EBEBEB ;
         }
     </style>
-    <script type="text/javascript">
-
-    $(function(){
-
-	var error_age = true;
-	var error_statur = false;
-	var error_check_password = false;
-	var error_email = false;
-	var error_check = false;
-
-
-	$('#age').blur(function() {
-		check_age();
-	});
-
-	$('#statur').blur(function() {
-		check_statur();
-	});
-
-	$('#cpwd').blur(function() {
-		check_cpwd();
-	});
-
-	$('#email').blur(function() {
-		check_email();
-	});
-
-	$('#allow').click(function() {
-		if($(this).is(':checked'))
-		{
-			error_check = false;
-			$(this).siblings('span').hide();
-		}
-		else
-		{
-			error_check = true;
-			$(this).siblings('span').html('请勾选同意');
-			$(this).siblings('span').show();
-		}
-	});
-
-
-	function check_age(){
-		var len = $('#age').val().length;
-
-		if(len<4)
-		{
-			$('#age').next().html('请输入年龄');
-			$('#age').next().show();
-            err_age = true;
-
-		}
-		else
-		{
-			err_age = false;
-        }
-	}
-    function check_statur(){
-		var len = $('#statur').val().length;
-
-		if(len<=0)
-		{
-			$('#statur').next().html('请输入身高');
-			$('#statur').next().show();
-            err_age = true;
-
-		}
-		else
-		{
-			err_age = false;
-        }
-	}
-
-	function check_pwd(){
-		var len = $('#pwd').val().length;
-		if(len<4||len>20)
-		{
-			$('#pwd').next().html('密码最少4位，最长20位');
-			$('#pwd').next().show();
-			error_password = true;
-		}
-		else
-		{
-			$('#pwd').next().hide();
-			error_password = false;
-		}
-	}
-
-
-	function check_cpwd(){
-		var pass = $('#pwd').val();
-		var cpass = $('#cpwd').val();
-
-		if(pass!=cpass)
-		{
-			$('#cpwd').next().html('两次输入的密码不一致');
-			$('#cpwd').next().show();
-			error_check_password = true;
-		}
-		else
-		{
-			$('#cpwd').next().hide();
-			error_check_password = false;
-		}
-
-	}
-
-	function check_email(){
-		var re = /^[a-z0-9][\w\.\-]*@[a-z0-9\-]+(\.[a-z]{2,5}){1,2}$/;
-		if(!re.test($('#email').val()))
-		{
-		    $('#email').next().html('你输入的邮箱格式不正确');
-			$('#email').next().show();
-			error_email = true;
-		}
-		else
-		{
-			$.get('{% url "user:register_exist" %}?uemail='+$('#email').val(),function(data){
-                if (data.email_count >= 1) {
-                    $('#email').next().html('邮箱已经存在').show();
-                    error_email = true;
-                }else{
-                    $('#email').next().hide();
-                    error_email = false;
-                }
-            });
-		}
-
-	}
-
-
-	$('#reg_form').submit(function() {
-		check_age();
-		check_statur();
-
-
-		if(error_age == false && error_statur == false)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-
-	});
-    });
-    </script>
 {% endblock head %}
 
 
@@ -286,21 +134,21 @@
 		</div>
 	</div>
     <div class="Content-Main">
-            <form action="{% url "user:form" %}" id='reg_form' method="post" class="form-userInfo">
+            <form  action="{% url "user:form" %}" method="post" class="form-userInfo">
                 {% csrf_token %}
                 <h1>个人信息</h1>
                 <p>
                 <label>
                     <span>年龄:</span>
-                    <input type="text" name="age" id="age" placeholder="请输入您的年龄">
+                    <input type="text" name="age" placeholder="请输入您的年龄">
                 </label>
                 <label class="Main-sex">
                     <span>性别:</span>
 
                     <select name="select1" style="zoom:130%">
                         <option  selected="selected">--请选择--</option>
-                        <option value="1">男</option>
-                        <option value="2">女</option>
+                        <option value="option1">男</option>
+                        <option value="option2">女</option>
                     </select>
 
                 </label>
@@ -332,28 +180,28 @@
                     <span>是否吸烟:</span>
                     <select name="select2" style="zoom:130%">
                         <option  selected="selected">--请选择--</option>
-                        <option value="1">是</option>
-                        <option value="2">否</option>
+                        <option value="option1">是</option>
+                        <option value="option2">否</option>
                     </select>
                 </label>
                 <label class="Main-sex">
                     <span>是否饮酒:</span>
                     <select name="select3" style="zoom:130%">
                         <option  selected="selected">--请选择--</option>
-                        <option value="1">是</option>
-                        <option value="2">否</option>
+                        <option value="option1">是</option>
+                        <option value="option2">否</option>
                     </select>
                 </label>
                 <label class="Main-sex">
                     <span>平日是否运动:</span>
                     <select name="select4" style="zoom:130%">
                         <option  selected="selected">--请选择--</option>
-                        <option value="1">是</option>
-                        <option value="2">否</option>
+                        <option value="option1">是</option>
+                        <option value="option2">否</option>
                     </select>
                 </label>
                 <label>
-                    <input type="submit" name="" value="提交" class="button">
+                    <input type="button" class="button" value="提交">
                 </label>
 
             </form>

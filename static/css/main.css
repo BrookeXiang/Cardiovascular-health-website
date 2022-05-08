@@ -94,11 +94,11 @@ html,body{
 
 /* 菜单、幻灯片样式 */
 
-.navbar_con{height:40px;border-bottom:2px solid #39a93e}
+.navbar_con{height:80px;border-bottom:2px solid #39a93e}
 .navbar{width:1200px;margin:0 auto;}
 .navbar h1{width:200px;height:40px;line-height:40px;text-align: center;font-size:14px;color:#fff;background-color:#39a93e;}
 
-.navbar .subnav_con{width:200px;height:40px;background-color:#39a93e;position:relative;cursor:pointer;}
+.navbar .subnav_con{width:200px;height:80px;background-color:#39a93e;position:relative;cursor:pointer;}
 
 .navbar .subnav_con h1{position:absolute;left:0;top:0;text-align:left;text-indent:40px}
 .navbar .subnav_con span{display:block;width:16px;height:9px;background:url(../images/down.png) no-repeat;position:absolute;right:27px;top:16px;transition:all 300ms ease-in;
@@ -110,8 +110,8 @@ html,body{
 .navbar .subnav_con:hover .subnav{display:block;}
 
 
-.navlist{margin-left:34px;}
-.navlist li{height:40px;float:left;line-height:40px;}
+.navlist{margin-left:15%;}
+.navlist li{height:80px;float:left;line-height:80px;}
 .navlist li a{color:#67b168;font-size:20px}
 .navlist li a:hover{color:#ff8800}
 .navlist .interval{margin:0 15px;}
@@ -373,15 +373,20 @@ html,body{
 .login_title{height:60px;width:308px;margin:10px auto;border-bottom:1px solid #e0e0e0;}
 
 .login_title h1{font-size:24px;height:60px;line-height:60px;color:#5fb42a;float:left;font-weight:bold;margin-left:44px;}
-.login_title a{width:100px;height:20px;display:block;font-size:16px;color:#5fb42a;text-indent:26px;background:url(../images/icons02.png) left 5px no-repeat;float:left;margin:20px 0 0 36px}
+.login_title a{width:100px;height:20px;display:block;font-size:16px;color:#5fb42a;text-indent:26px;float:left;margin:20px 0 0 36px}
 
 .form_input{width:308px;height:250px;margin:20px auto;position:relative;}
-.name_input,.pass_input{width:306px;height:36px;border:1px solid #e0e0e0;background:url(../images/icons02.png) 280px -41px no-repeat #f8f8f8;outline:none;font-size:14px;text-indent:10px;position: absolute;left:0;top:0}
+.name_input,.pass_input{width:306px;height:36px;border:1px solid #e0e0e0;outline:none;font-size:14px;text-indent:10px;position: absolute;left:0;top:0}
 .pass_input{top:65px;background-position:280px -95px;}
 .vc_input{width:180px;height:36px;border:1px solid #e0e0e0;outline:none;font-size:14px;text-indent:10px;position: absolute;left:0;top:130px;background-position:280px -95px;}
 #verifycode,#verifycodeChange{width:120px;height:36px;border:1px solid #e0e0e0;outline:none;font-size:14px;text-indent:10px;position: absolute;left:188px;top:130px;background-position:280px -95px;}
 
 .user_error,.pwd_error,.vc_error{color:#f00;position:absolute;left:0;top:43px;display:none}
+
+.index_form{width:1000px;height:750px;border:1px solid #c6c6c5;background-color:#fff; position:absolute;left:0; right:0; top:0; bottom:0;margin:auto;}
+.index_input{width:900px;height:720px;margin:20px auto;position:absolute;left:0; right:0; top:0; bottom:0;margin:auto;}
+.index_input submit1{width:308px;height:250px;margin:20px auto;position:relative;}
+
 
 .pwd_error{top:110px;}
 .vc_error{top:177px;}

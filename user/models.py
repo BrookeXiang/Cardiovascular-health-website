@@ -25,16 +25,18 @@ class UserInfo(models.Model):
 
 class HealthInformation(models.Model):
 
-    i_age = models.CharField(max_length=250, verbose_name="年龄")
-    i_sex = models.CharField(max_length=250, verbose_name="性别")
-    i_statur = models.CharField(max_length=250, verbose_name="身高")
-    i_weight = models.CharField(max_length=250, verbose_name="体重")
-    i_systolicpress = models.CharField(max_length=250, verbose_name="收缩压")
-    i_diastolicpress = models.CharField(max_length=250, verbose_name="舒张压")
-    i_bloodglucose = models.CharField(max_length=250, verbose_name="血糖")
-    i_smoke = models.CharField(max_length=250, verbose_name="是否吸烟")
-    i_drink = models.CharField(max_length=250, verbose_name="是否饮酒")
-    i_sport = models.CharField(max_length=250, verbose_name="是否运动")
+    i_age = models.CharField(max_length=250, default='0', verbose_name="年龄")
+    i_sex = models.CharField(max_length=250, default='0', verbose_name="性别")
+    i_statur = models.CharField(max_length=250, default='0', verbose_name="身高")
+    i_weight = models.CharField(max_length=250, default='0', verbose_name="体重")
+    i_systolicpress = models.CharField(max_length=250, default='0', verbose_name="收缩压")
+    i_diastolicpress = models.CharField(max_length=250, default='0', verbose_name="舒张压")
+    i_cholesterol = models.CharField(max_length=250, default='0', verbose_name="胆固醇")
+    i_bloodglucose = models.CharField(max_length=250, default='0', verbose_name="血糖")
+    i_smoke = models.CharField(max_length=250, default='0', verbose_name="是否吸烟")
+    i_drink = models.CharField(max_length=250, default='0', verbose_name="是否饮酒")
+    i_sport = models.CharField(max_length=250, default='0', verbose_name="是否运动")
+    i_time = models.DateTimeField(verbose_name="输入时间", default=datetime.now)
     i_user = models.ForeignKey(UserInfo, on_delete=models.CASCADE, verbose_name="消息")
 
     class Meta:

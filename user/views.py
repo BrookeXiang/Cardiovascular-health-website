@@ -215,4 +215,53 @@ def index(request):
 
     return render(request, 'user/index.html', context)
 
+def form(request):
+
+    messages.success(request, "用户邮箱与输入邮件不匹配，重置失败！")
+    if request.session.get('type') != 'user':
+        return redirect(reverse("user:login"))
+    username = request.session.get('user_name')
+    user = UserInfo.objects.filter(u_name=username).first()
+    info = HealthInformation.objects.create(i_user=user)
+    uage = request.POST.get('age')
+    info.i_age = uage
+    usex = request.POST.get('select1')
+    info.i_sex = usex
+    ustatur = request.POST.get('statur')
+    info.i_statur = ustatur
+    uweight = request.POST.get('weight')
+    info.i_weight = uweight
+    usystolicpress = request.POST.get('systolicpress')
+    info.i_systolicpress = usystolicpress
+    udiastolicpress = request.POST.get('diastolicpress')
+    info.i_diastolicpress = udiastolicpress
+    ucholesterol = request.POST.get('cholesterol')
+    info.i_cholesterol = ucholesterol
+    ubloodglucose = request.POST.get('bloodglucose')
+    info.i_bloodglucose = ubloodglucose
+    usmoke = request.POST.get('select2')
+    info.i_smoke = usmoke
+    udrink = request.POST.get('select3')
+    info.i_drink = udrink
+    usport = request.POST.get('select4')
+    info.i_sport = usport
+    info.save()
+    print('--------------------------')
+    print(uage)
+    print(usex)
+    print(ustatur)
+    print(uweight)
+    print(usystolicpress)
+    print(udiastolicpress)
+    print(ucholesterol)
+    print(ubloodglucose)
+    print('--------------------------')
+
+
+    context = {
+        'title': '首页',
+    }
+
+    return render(request, 'user/index.html', context)
+
 
