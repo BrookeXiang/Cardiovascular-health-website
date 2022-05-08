@@ -6,18 +6,17 @@ from datetime import datetime
 
 class UserInfo(models.Model):
 
-    u_name = models.CharField(max_length=20, verbose_name="用户名", unique=True)
-    u_logo= models.FileField(verbose_name="用户头像",upload_to='images', default='default.jpg')
-    u_pwd = models.CharField(max_length=40, verbose_name="用户密码", blank=False)
-    u_email = models.EmailField(verbose_name="邮箱", unique=True)
-    u_realname = models.CharField(max_length=20, default="", verbose_name="真实姓名")
-    u_address = models.CharField(max_length=100, default="", verbose_name="地址")
-    u_postcode = models.CharField(max_length=6, default="", verbose_name="邮编")
-    u_phone = models.CharField(max_length=11, default="", verbose_name="手机号")
-    u_name_passOrfail = models.BooleanField(verbose_name="允许登录", default=True)
+    u_name = models.CharField(max_length=20, verbose_name="username", unique=True)
+    u_pwd = models.CharField(max_length=40, verbose_name="password", blank=False)
+    u_email = models.EmailField(verbose_name="email", unique=True)
+    u_realname = models.CharField(max_length=20, default="", verbose_name="name")
+    u_address = models.CharField(max_length=100, default="", verbose_name="address")
+    u_postcode = models.CharField(max_length=6, default="", verbose_name="mail")
+    u_phone = models.CharField(max_length=11, default="", verbose_name="phone")
+    u_name_passOrfail = models.BooleanField(verbose_name="submit", default=True)
 
     class Meta:
-        verbose_name = "用户信息"
+        verbose_name = "user"
         verbose_name_plural = verbose_name
 
     def __str__(self):
@@ -25,24 +24,24 @@ class UserInfo(models.Model):
 
 class HealthInformation(models.Model):
 
-    i_age = models.CharField(max_length=250, default='0', verbose_name="年龄")
-    i_sex = models.CharField(max_length=250, default='0', verbose_name="性别")
-    i_statur = models.CharField(max_length=250, default='0', verbose_name="身高")
-    i_weight = models.CharField(max_length=250, default='0', verbose_name="体重")
-    i_systolicpress = models.CharField(max_length=250, default='0', verbose_name="收缩压")
-    i_diastolicpress = models.CharField(max_length=250, default='0', verbose_name="舒张压")
-    i_cholesterol = models.CharField(max_length=250, default='0', verbose_name="胆固醇")
-    i_bloodglucose = models.CharField(max_length=250, default='0', verbose_name="血糖")
-    i_smoke = models.CharField(max_length=250, default='0', verbose_name="是否吸烟")
-    i_drink = models.CharField(max_length=250, default='0', verbose_name="是否饮酒")
-    i_sport = models.CharField(max_length=250, default='0', verbose_name="是否运动")
-    i_time = models.DateTimeField(verbose_name="输入时间", default=datetime.now)
-    i_user = models.ForeignKey(UserInfo, on_delete=models.CASCADE, verbose_name="消息")
+    i_age = models.IntegerField(default='0', verbose_name="age")
+    i_sex = models.IntegerField(default='0', verbose_name="sex")
+    i_statur = models.FloatField(max_length=250, default='0', verbose_name="height")
+    i_weight = models.FloatField(max_length=250, default='0', verbose_name="weight")
+    i_systolicpress = models.FloatField(max_length=250, default='0', verbose_name="systolicpress")
+    i_diastolicpress = models.FloatField(max_length=250, default='0', verbose_name="iastolicpress")
+    i_cholesterol = models.FloatField(max_length=250, default='0', verbose_name="holesterol")
+    i_bloodglucose = models.FloatField(max_length=250, default='0', verbose_name="bloodglucose")
+    i_smoke = models.IntegerField(default='0', verbose_name="smoke")
+    i_drink = models.IntegerField(default='0', verbose_name="drink")
+    i_sport = models.IntegerField(default='0', verbose_name="sport")
+    i_time = models.DateTimeField(verbose_name="time", default=datetime.now)
+    i_user = models.ForeignKey(UserInfo, on_delete=models.CASCADE, verbose_name="ser")
 
     class Meta:
-        verbose_name = "健康信息"
+        verbose_name = "information"
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.i_age
+        return str(self.i_user.u_name)
 

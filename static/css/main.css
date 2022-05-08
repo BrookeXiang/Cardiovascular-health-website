@@ -96,7 +96,7 @@ html,body{
 
 .navbar_con{height:80px;border-bottom:2px solid #39a93e}
 .navbar{width:1200px;margin:0 auto;}
-.navbar h1{width:200px;height:40px;line-height:40px;text-align: center;font-size:14px;color:#fff;background-color:#39a93e;}
+.navbar h1{width:200px;height:80px;line-height:40px;text-align: center;font-size:14px;color:#fff;background-color:#39a93e;}
 
 .navbar .subnav_con{width:200px;height:80px;background-color:#39a93e;position:relative;cursor:pointer;}
 
@@ -110,9 +110,9 @@ html,body{
 .navbar .subnav_con:hover .subnav{display:block;}
 
 
-.navlist{margin-left:15%;}
-.navlist li{height:80px;float:left;line-height:80px;}
-.navlist li a{color:#67b168;font-size:20px}
+.navlist{margin-left: 70px;}
+.navlist li{height:80px;margin-left:0px;float:left;line-height:80px;}
+.navlist li a{color:#67b168;font-size:20px;float:left}
 .navlist li a:hover{color:#ff8800}
 .navlist .interval{margin:0 15px;}
 
@@ -426,7 +426,7 @@ html,body{
 .r_con{width:400px;}
 .reg_title{width:360px;height:50px;float:left;margin-left:30px;border-bottom:1px solid #e0e0e0}
 .reg_title h1{height:50px;line-height:50px;float:left;font-size:24px;color:#a8a8a8;font-weight:bold;}
-.reg_title a{float:right;height:20px;line-height:20px;font-size:16px;color:#5fb42a;padding-right:20px;background:url(../images/icons02.png) 35px 3px no-repeat;margin-top:15px}
+.reg_title a{float:right;height:20px;line-height:20px;font-size:16px;color:#5fb42a;padding-right:20px;margin-top:15px}
 
 .reg_form{width:360px;margin:30px 0 0 30px;float:left;position:relative;}
 .reg_form li{height:70px;}

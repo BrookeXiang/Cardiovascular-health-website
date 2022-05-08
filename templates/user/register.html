@@ -47,7 +47,7 @@
 		else
 		{
 			error_check = true;
-			$(this).siblings('span').html('请勾选同意');
+			$(this).siblings('span').html('check protocol');
 			$(this).siblings('span').show();
 		}
 	});
@@ -58,7 +58,7 @@
 
 		if(len<5||len>20)
 		{
-			$('#user_name').next().html('输入5-20个字符的用户名');
+			$('#user_name').next().html('input 5-20 characters');
 			$('#user_name').next().show();
 			error_name = true;
 
@@ -67,7 +67,7 @@
 		{
 			$.get('{% url "user:register_exist" %}?uname='+$('#user_name').val(),function(data){
                 if (data.count >= 1) {
-                    $('#user_name').next().html('用户名已经存在').show();
+                    $('#user_name').next().html('username exists').show();
                     error_name = true;
                 }else{
                     $('#user_name').next().hide();
@@ -81,7 +81,7 @@
 		var len = $('#pwd').val().length;
 		if(len<4||len>20)
 		{
-			$('#pwd').next().html('密码最少4位，最长20位');
+			$('#pwd').next().html('password num is incorrect');
 			$('#pwd').next().show();
 			error_password = true;
 		}
@@ -99,7 +99,7 @@
 
 		if(pass!=cpass)
 		{
-			$('#cpwd').next().html('两次输入的密码不一致');
+			$('#cpwd').next().html('inconsistent passwords');
 			$('#cpwd').next().show();
 			error_check_password = true;
 		}
@@ -115,7 +115,7 @@
 		var re = /^[a-z0-9][\w\.\-]*@[a-z0-9\-]+(\.[a-z]{2,5}){1,2}$/;
 		if(!re.test($('#email').val()))
 		{
-		    $('#email').next().html('你输入的邮箱格式不正确');
+		    $('#email').next().html('email is incorrect');
 			$('#email').next().show();
 			error_email = true;
 		}
@@ -123,7 +123,7 @@
 		{
 			$.get('{% url "user:register_exist" %}?uemail='+$('#email').val(),function(data){
                 if (data.email_count >= 1) {
-                    $('#email').next().html('邮箱已经存在').show();
+                    $('#email').next().html('email exist').show();
                     error_email = true;
                 }else{
                     $('#email').next().hide();
@@ -161,7 +161,7 @@
     <div class="close clearfix">
         <div class="model clearfix">
             <div class="site_con">
-                <p class="centerAlign" style="color:yellowgreen;text-align: center;font-size: 18px;">平台使用协议</p><br /><br />
+                <p class="centerAlign" style="color:yellowgreen;text-align: center;font-size: 18px;">protocol</p><br /><br />
 
                     <tr>
                         <td style="border: none; padding-left: 0;">
@@ -182,40 +182,40 @@
 
 		<div class="r_con fr">
 			<div class="reg_title clearfix">
-				<h1>用户注册</h1>
-				<a href="{% url "user:login" %}">登录</a>
+				<h1>register</h1>
+				<a href="{% url "user:login" %}"> login  </a>
 			</div>
 			<div class="reg_form clearfix">
 				<form action="{% url "user:register_handle" %}" id='reg_form' method="post">
                     {% csrf_token %}
 				<ul>
 					<li>
-						<label>用户名:</label>
+						<label>username:</label>
 						<input type="text" name="user_name" id="user_name">
-						<span class="error_tip">提示信息</span>
+						<span class="error_tip">error</span>
 					</li>
 					<li>
-						<label>密码:</label>
+						<label>password:</label>
 						<input type="password" name="pwd" id="pwd">
-						<span class="error_tip">提示信息</span>
+						<span class="error_tip">error</span>
 					</li>
 					<li>
-						<label>确认密码:</label>
+						<label>again:</label>
 						<input type="password" name="confirm_pwd" id="cpwd">
-						<span class="error_tip">提示信息</span>
+						<span class="error_tip">error</span>
 					</li>
 					<li>
-						<label>邮箱:</label>
+						<label>email:</label>
 						<input type="text" name="email" id="email">
-						<span class="error_tip">提示信息</span>
+						<span class="error_tip">error</span>
 					</li>
 					<li class="agreement">
 						<input type="checkbox" name="allow" id="allow" checked="checked">
-						<label>同意<a href="javascript:void(0)" class="btn">《平台使用协议》</a></label>
-						<span class="error_tip2">提示信息</span>
+						<label>agree<a href="javascript:void(0)" class="btn">《protocal》</a></label>
+						<span class="error_tip2">error</span>
 					</li>
 					<li class="reg_sub">
-						<input type="submit" value="注 册">
+						<input type="submit" value="register">
 					</li>
 				</ul>				
 				</form>

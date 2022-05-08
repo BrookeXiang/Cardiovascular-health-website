@@ -1,7 +1,10 @@
 import numpy
 import scipy.special
 import scipy.ndimage
-
+import pickle
+import matplotlib.pylab as plt
+import pickle
+save_file =  "./mnist.pkl"
 class neuralNetwork:
     def __init__(self, inputnodes, hiddennodes, outputnodes, learningrate):
         self.inodes = inputnodes
@@ -26,7 +29,6 @@ class neuralNetwork:
         self.wih += self.lr * numpy.dot((hidden_errors * hidden_outputs * (1.0 - hidden_outputs)), numpy.transpose(inputs))
         pass
 
-
     def log_loss(self,y_hat, y):
         return -(y*(self.activation_function(y_hat) + (1 - y) * self.activation_function(1 - y_hat)))
 
@@ -38,89 +40,58 @@ class neuralNetwork:
         final_outputs = self.activation_function(final_inputs)
         return final_outputs
 
-# input_nodes = 10
-# hidden_nodes = 200
-# output_nodes = 1
-# learning_rate = 0.01
-# n = neuralNetwork(input_nodes,hidden_nodes,output_nodes, learning_rate)
-# training_data_file = open("mnist_dataset/cardio_train.csv", 'r')
-# training_data_list = training_data_file.read().splitlines()
-# training_data_file.close()
-# epochs = 1
-#
-# for e in range(epochs):
-#     for record in training_data_list:
-#         all_values = record.split(';')
-#         if all_values[0] == '':
-#             continue
-#         targets = numpy.array([all_values[10]], dtype=int)
-#         inputs =  numpy.array(all_values[0:10], dtype=int)
-#         n.train(inputs, targets)
-#         pass
-#     pass
-# test_data_file = open("mnist_dataset/cardio_train.csv", 'r')
-# test_data_list = test_data_file.read().splitlines()
-# test_data_file.close()
-#
-# scorecard = []
-# deviations = []
-# correct_labels = []
-# outputs_total = []
-# # mean squared error
-# mean_squared_errors = []
-# mean_squared_error_total = 1
-# # Classification rate
-# classification_rates = []
-# # Classification accuracy
-# classification_accuracys = []
-# # total psotion
-# total_psotion = 1
-# total_psotions = []
-# degree = 0
-# for record in test_data_list:
-#     all_values = record.split(';')
-#     if all_values[0] == '':
-#         continue
-#     degree += 1
-#     correct_label = int(all_values[10])
-#     correct_labels.append(correct_label)
-#     inputs= numpy.array(all_values[0:10], dtype=int)
-#     outputs = n.query(inputs)
-#     if outputs[0][0] > 0:
-#         label = 1
-#     else:
-#         label = 0
-#     # mean_squared_error_total += (outputs[0][0] - correct_label) * (outputs[0][0] - correct_label)
-#     mean_squared_errors.append(n.log_loss(outputs[0][0],label))
-#     outputs_total.append(label)
-#     if (label == correct_label):
-#         scorecard.append(1)
-#     else:
-#         scorecard.append(0)
-#     if correct_label == 1:
-#         total_psotion+=1
-#     total_psotions.append(sum(scorecard) / total_psotion)
-#     pass
-#
-# degree = 0
-# # tp
-# scorecard_total = 0
-# for record in scorecard:
-#     degree += 1
-#     scorecard_total += record
-#     classification_rates.append(scorecard_total / degree)
-#     classification_accuracys.append((degree - scorecard_total) / degree)
-def predict(inputlist):
-    input_nodes = 10
+def train_modal(epochs=1):
+    input_nodes = 12
+    hidden_nodes = 200
+    output_nodes = 1
+    learning_rate = 0.01
+    n = neuralNetwork(input_nodes,hidden_nodes,output_nodes, learning_rate)
+    training_data_file = open("mnist_dataset/cardio_train.csv", 'r')
+    training_data_list = training_data_file.read().splitlines()
+    training_data_file.close()
+
+    for e in range(epochs):
+        key = -1
+        for record in training_data_list:
+            key += 1
+            all_values = record.split(';')
+            if all_values[0] == '':
+                continue
+            if key == 0:
+                continue
+            targets = numpy.array([all_values[12]], dtype=float)
+            inputs =  numpy.array(all_values[0:12], dtype=float)
+            n.train(inputs, targets)
+    pickle.dump(n.wih, open(f'./wih_value.pkl', 'wb'))
+    pickle.dump(n.who, open(f'./who_value.pkl', 'wb'))
+
+def loadNwValue(nn):
+    print(nn.wih)
+    val1 = pickle.load(open(f'./wih_value.pkl', 'rb'))
+    val2 = pickle.load(open(f'./who_value.pkl', 'rb'))
+    nn.wih = val1
+    nn.who = val2
+    print(nn.wih)
+    return nn
+
+def predict(list):
+    input_nodes = 12
     hidden_nodes = 200
     output_nodes = 1
     learning_rate = 0.01
     n = neuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
-    training_data_file = open("mnist_dataset/cardio_train.csv", 'r')
-    training_data_list = training_data_file.read().splitlines()
-    training_data_file.close()
-    result = n.query(inputlist)
-    if result[0][0] > 0.5:
+    nn = loadNwValue(n)
+    result = nn.query(list)
+    if result[0][0] < 0.5:
         return True
     else:
         return False
+
+if __name__ == '__main__':
+    input_nodes = 12
+    hidden_nodes = 200
+    output_nodes = 1
+    learning_rate = 0.01
+    n = neuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
+    loadNwValue(n)
+

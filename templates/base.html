@@ -3,7 +3,7 @@
 {% block body %}
     <div class="header_con" id="header_con">
 		<div class="header">
-			<div class="welcome fl">欢迎来到心血管疾病检测网站!</div>
+			<div class="welcome fl">welcome to the website!</div>
 			<div class="fr">
 {#                判断是否已经登录#}
                 {% if request.session.user_name|default:'' != '' %}
@@ -16,13 +16,13 @@
 				</div>
                 <div class="login_btn fl">
                     <span>|</span>
-                    <em><a href="{% url "user:logout" %}">退出</a></em>
+                    <em><a href="{% url "user:logout" %}">exit</a></em>
 				</div>
                 {% else %}
 				<div class="login_btn fl">
-					<a href="{% url "user:login" %}">登录</a>
+					<a href="{% url "user:login" %}">login</a>
 					<span>|</span>
-					<a href="{% url "user:register" %}">注册</a>
+					<a href="{% url "user:register" %}">register</a>
 				</div>
                 {% endif %}
 			</div>

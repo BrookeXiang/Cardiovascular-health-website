@@ -2,11 +2,13 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>倒计时5秒跳转页面</title>
+        <title>5s to return</title>
     </head>
     <body>
-    {{ message_text }}，<span id="zhuan" style="color: #0022ff; font-size: 20px;">3</span>秒后跳转页面!<br />
-    {{ message }}
+    {{ message_text }}，<span id="zhuan" style="color: #0022ff; font-size: 20px;">3</span>s to return!<br />
+    {% for mes in message %}
+        <div>{{ mes }}</div>
+    {% endfor %}
     </body>
     <script type="text/javascript">
         var time=2;

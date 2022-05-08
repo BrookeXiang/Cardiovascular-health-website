@@ -15,17 +15,17 @@
         vc_error = false;
 
         if({{ error_name }}==1){
-            $('.user_error').html('用户名错误').show();
+            $('.user_error').html('username error').show();
         }
         if({{ error_pwd }}==1){
-            $('.pwd_error').html('密码错误').show();
+            $('.pwd_error').html('password error').show();
         }
         if({{ error_vc }}==1){
-            $('.vc_error').html('验证码错误').show();
+            $('.vc_error').html('verification code error').show();
         }
         $('.name_input').blur(function () {
             if($('.name_input').val().length=0){
-                $('.user_error').html('请填写用户名').show();
+                $('.user_error').html('input username').show();
                 name_error = false;
             }else{
                 $('.user_error').hide();
@@ -34,7 +34,7 @@
         });
         $('.pass_input').blur(function () {
             if($('.pass_input').val().length=0){
-                $('.pwd_error').html('请输入密码').show();
+                $('.pwd_error').html('input password').show();
                 pwd_error = false;
             }else{
                 $('.pwd_error').hide();
@@ -43,7 +43,7 @@
         });
         $('.vc_input').blur(function () {
             if($('.vc_input').val().length=0){
-                $('.vc_error').html('请输入验证码').show();
+                $('.vc_error').html('input vertify code').show();
                 vc_error = false;
             }else{
                 $('.vc_error').hide();
@@ -60,28 +60,28 @@
 		<div class="login_form_wrap clearfix">
 			<div class="login_form fr">
 				<div class="login_title clearfix">
-					<h1>用户登录</h1>
-					<a href="{% url "user:register" %}">立即注册</a>
+					<h1>login</h1>
+					<a href="{% url "user:register" %}">register</a>
 				</div>
 				<div class="form_input">
 					<form action="{% url "user:login_handle" %}" method="post">
                         {% csrf_token %}
-						<input type="text" name="username" class="name_input" value="{{ username }}" placeholder="请输入用户名">
-						<div class="user_error">输入错误</div>
-						<input type="password" name="pwd" class="pass_input" value="{{ password }}" placeholder="请输入密码">
+						<input type="text" name="username" class="name_input" value="{{ username }}">
+						<div class="user_error">error</div>
+						<input type="password" name="pwd" class="pass_input" value="{{ password }}" >
 {#                        在cookie设置的情况下value值保证页面刷新之后保证仍旧能够在页面看到值#}
-						<div class="pwd_error">输入错误</div>
+						<div class="pwd_error">error</div>
 {#                        验证码 #}
-                        <input type="text" name="vc" class="vc_input" placeholder="请输入验证码">
-                        <div class="vc_error">输入错误</div>
+                        <input type="text" name="vc" class="vc_input">
+                        <div class="vc_error">error</div>
                         <img id='verifycode' src="/verifycode/?1" alt="CheckCode"/>
-                        <span id='verifycodeChange' aria-placeholder="看不清，换一个"></span>
+                        <span id='verifycodeChange' aria-placeholder="change"></span>
 						<div class="more_input clearfix">
 							<input type="checkbox" name="jizhu" value="1" checked="checked">
-							<label>记住用户名</label>
-							<a href="{% url "user:findpwdView" %}">忘记密码</a>
+							<label>remember username</label>
+							<a href="{% url "user:findpwdView" %}">forget the password</a>
 						</div>
-						<input type="submit" name="" value="登录" class="input_submit">
+						<input type="submit" name="" value="login" class="input_submit">
 					</form>
 				</div>
 			</div>
