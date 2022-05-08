@@ -5,7 +5,7 @@ from django.views.static import serve
 from health_monitoring import settings
 from .views import *
 from . import viewsUtil
-from django.conf.urls import url,re_path
+from django.conf.urls import url, re_path
 
 app_name = 'user'
 
@@ -16,12 +16,12 @@ urlpatterns = [
     url(r'^login/$', login, name="login"),
     url(r'^login_handle/$', login_handle, name="login_handle"),
     url(r'^logout/$', logout, name="logout"),
-    url(r'^findpwdView/$', findpwdView,name="findpwdView"),
-    url(r'^verify_show/$', verify_show,name="verify_show"),
+    url(r'^findpwdView/$', findpwdView, name="findpwdView"),
+    url(r'^verify_show/$', verify_show, name="verify_show"),
     url(r'^form/$', form, name="form"),
     url(r'^figure/$', figure, name="figure"),
     url(r'^predict/$', predict, name="predict"),
-    url(r'^verifycode/$', viewsUtil.verify_code,name="verifycode"),
+    url(r'^verifycode/$', viewsUtil.verify_code, name="verifycode"),
     url('^$', index, name="index"),
-    re_path('^media/(?P<path>.*)/$',serve,{'document_root':settings.MEDIA_ROOT}),
+    re_path('^media/(?P<path>.*)/$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]

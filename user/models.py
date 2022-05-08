@@ -3,9 +3,7 @@ from django.db import models
 from datetime import datetime
 
 
-
 class UserInfo(models.Model):
-
     u_name = models.CharField(max_length=20, verbose_name="username", unique=True)
     u_pwd = models.CharField(max_length=40, verbose_name="password", blank=False)
     u_email = models.EmailField(verbose_name="email", unique=True)
@@ -22,8 +20,8 @@ class UserInfo(models.Model):
     def __str__(self):
         return self.u_name
 
-class HealthInformation(models.Model):
 
+class HealthInformation(models.Model):
     i_age = models.IntegerField(default='0', verbose_name="age")
     i_sex = models.IntegerField(default='0', verbose_name="sex")
     i_statur = models.FloatField(max_length=250, default='0', verbose_name="height")
@@ -44,4 +42,3 @@ class HealthInformation(models.Model):
 
     def __str__(self):
         return str(self.i_user.u_name)
-

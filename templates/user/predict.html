@@ -2,16 +2,13 @@
 
 {% block head %}
     <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="/static/js/slide.js"></script>
+    <script type="text/javascript" src="/static/js/slide.js"></script>
 
     <style type="text/css">
-        .Content-Main{
+        .Content-Main {
             max-width: 100%;
-            height: 200px;
-            {#margin-top: 20px;#}
-            {#margin-bottom: 20px;#}
-            {#margin-left: 25%;#}
-            border: none;
+            height: 550px;
+        {#margin-top: 20px;#}{#margin-bottom: 20px;#}{#margin-left: 25%;#} border: none;
             border-radius: 5px;
             -moz-border-radius: 5px;
             -webkit-border-radius: 5px;
@@ -20,45 +17,57 @@
             color: white;
             background: #00C6D7;
         }
-        .Content-Main a{
-            position: relative; top:70px;
+
+        .Content-Main a {
+            position: relative;
+            top: 70px;
+            left: 300px;
             font: 30px "Helvetica Neue", Helvetica, Arial, sans-serif;
             text-shadow: 1px 1px 1px #444;
             color: white;
         }
-        .Content-Main h1{
+
+        .Content-Main h1 {
 
             padding: 8px 0px 40px 10px;
             display: block;
             border-bottom: 1px solid #444;
         }
-        .text1{
+
+        .text1 {
             margin-left: 3px;
-            font-size:20px;color:white;font-weight:bold;font-family:kaiti
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            font-family: kaiti
 
         }
-        .Content-Main label{
+
+        .Content-Main label {
             margin: 10px 5px 10px;
             display: block;
         }
-        .fileInputContainer{
+
+        .fileInputContainer {
             height: 99px;
             width: 99px;
-            margin: 20px 20px 20px 20px ;
+            margin: 20px 20px 20px 20px;
             border: none;
             overflow: hidden;
             position: relative;
         }
-        .fileInput{
+
+        .fileInput {
             height: 106px;
             border: none;
             font-size: 300px;
             opacity: 0;
-            filter:alpha(opacity=0);
+            filter: alpha(opacity=0);
             cursor: pointer;
             position: absolute;
         }
-        .Content-Main label>span{
+
+        .Content-Main label > span {
             width: 20%;
             float: left;
             text-align: right;
@@ -71,18 +80,21 @@
         {#    float: right;#}
         {#    margin-top: 10px;#}
         {#    font-weight: bold;#}
-        {#}#}
-        .Main-sex{
+        {
+        #}#}
+        .Main-sex {
             padding-right: 13px;
             padding-bottom: 13px;
             font-weight: bold;
             line-height: 4px;
         }
-        .Main-sex input[type=checkbox]{
-            margin-top:6px;
-            vertical-align:middle;
+
+        .Main-sex input[type=checkbox] {
+            margin-top: 6px;
+            vertical-align: middle;
         }
-        .Content-Main input[type="text"],.Content-Main input[type="email"],.Content-Main textarea{
+
+        .Content-Main input[type="text"], .Content-Main input[type="email"], .Content-Main textarea {
             height: 25px;
             width: 50%;
             line-height: 15px;
@@ -91,22 +103,30 @@
             margin-right: 6px;
             margin-top: 2px;
             border: none;
-            border-radius:2px;
-            -webkit-border-radius:2px;
-            -moz-border-radius:2px;
+            border-radius: 2px;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
             outline: 0 none;
-            background:  white;
+            background: white;
             color: #525252;
         }
-        .Content-Main textarea{
+
+        .Content-Main textarea {
             height: 100px;
             width: 70%;
             padding: 5px 0px 0px 5px;
         }
+
         .error_tip {
-            float:left;foint-size:1px;height:30px;line-height:30px;margin-left:70px;color:#e62e2e;
+            float: left;
+            foint-size: 1px;
+            height: 30px;
+            line-height: 30px;
+            margin-left: 70px;
+            color: #e62e2e;
         }
-        .Content-Main .button{
+
+        .Content-Main .button {
             padding: 8px 24px 8px 24px;
             margin-bottom: 8px;
             margin-left: 280px;
@@ -116,184 +136,252 @@
             -webkit-border-radius: 4px;
             font-weight: bold;
             text-shadow: 1px 1px 1px #FFE477;
-            box-shadow: 1px 1px 1px  #3D3D3D;
-            -moz-box-shadow: 1px 1px 1px  #3D3D3D;
-            -webkit-box-shadow: 1px 1px 1px  #3D3D3D;
+            box-shadow: 1px 1px 1px #3D3D3D;
+            -moz-box-shadow: 1px 1px 1px #3D3D3D;
+            -webkit-box-shadow: 1px 1px 1px #3D3D3D;
             color: #585858;
             background: #f6ff0a;
         }
-        .Content-Main .button:hover{
-            color:  #333;
-            background-color:  #EBEBEB ;
+
+        .Content-Main .button:hover {
+            color: #333;
+            background-color: #EBEBEB;
         }
+
+        .act {
+            color: #eb5424 !important;
+        }
+
+        .bodyResult {
+            height: 300px;
+            margin: 100px auto 100px 300px;
+            width: 450px;
+            position: relative;
+        }
+
+        .bodyResultBMI {
+            position: absolute;
+            top: 30px;
+            left: 120px;
+            font-size: 50px;
+        }
+
+        .bodyResultBMITitle {
+            position: absolute;
+            top: 30px;
+            font-size: 50px;
+        }
+
+        .bodyResultTips {
+            position: absolute;
+            top: 120px;
+        }
+
+        .BMIBox {
+            position: absolute;
+            top: 210px;
+        }
+
+        .cursor1 {
+            position: absolute;
+            left: 110px;
+            top: 40px
+        }
+
+        .cursor2 {
+            position: absolute;
+            top: 40px;
+            left: 375px;
+        }
+
+        .cursor3 {
+            position: absolute;
+            top: 40px;
+            left: 560px;
+        }
+
+        .currentCursor {
+            position: absolute;
+            top: -35px
+        }
+
     </style>
     <script type="text/javascript">
 
-    $(function(){
+        $(function () {
 
-	var error_age = true;
-	var error_statur = false;
-	var error_check_password = false;
-	var error_email = false;
-	var error_check = false;
-
-
-	$('#age').blur(function() {
-		check_age();
-	});
-
-	$('#statur').blur(function() {
-		check_statur();
-	});
-
-	$('#cpwd').blur(function() {
-		check_cpwd();
-	});
-
-	$('#email').blur(function() {
-		check_email();
-	});
-
-	$('#allow').click(function() {
-		if($(this).is(':checked'))
-		{
-			error_check = false;
-			$(this).siblings('span').hide();
-		}
-		else
-		{
-			error_check = true;
-			$(this).siblings('span').html('请勾选同意');
-			$(this).siblings('span').show();
-		}
-	});
+            var error_age = true;
+            var error_statur = false;
+            var error_check_password = false;
+            var error_email = false;
+            var error_check = false;
 
 
-	function check_age(){
-		var len = $('#age').val().length;
+            $('#age').blur(function () {
+                check_age();
+            });
 
-		if(len<4)
-		{
-			$('#age').next().html('请输入年龄');
-			$('#age').next().show();
-            err_age = true;
+            $('#statur').blur(function () {
+                check_statur();
+            });
 
-		}
-		else
-		{
-			err_age = false;
-        }
-	}
-    function check_statur(){
-		var len = $('#statur').val().length;
+            $('#cpwd').blur(function () {
+                check_cpwd();
+            });
 
-		if(len<=0)
-		{
-			$('#statur').next().html('请输入身高');
-			$('#statur').next().show();
-            err_age = true;
+            $('#email').blur(function () {
+                check_email();
+            });
 
-		}
-		else
-		{
-			err_age = false;
-        }
-	}
-
-	function check_pwd(){
-		var len = $('#pwd').val().length;
-		if(len<4||len>20)
-		{
-			$('#pwd').next().html('密码最少4位，最长20位');
-			$('#pwd').next().show();
-			error_password = true;
-		}
-		else
-		{
-			$('#pwd').next().hide();
-			error_password = false;
-		}
-	}
-
-
-	function check_cpwd(){
-		var pass = $('#pwd').val();
-		var cpass = $('#cpwd').val();
-
-		if(pass!=cpass)
-		{
-			$('#cpwd').next().html('两次输入的密码不一致');
-			$('#cpwd').next().show();
-			error_check_password = true;
-		}
-		else
-		{
-			$('#cpwd').next().hide();
-			error_check_password = false;
-		}
-
-	}
-
-	function check_email(){
-		var re = /^[a-z0-9][\w\.\-]*@[a-z0-9\-]+(\.[a-z]{2,5}){1,2}$/;
-		if(!re.test($('#email').val()))
-		{
-		    $('#email').next().html('你输入的邮箱格式不正确');
-			$('#email').next().show();
-			error_email = true;
-		}
-		else
-		{
-			$.get('{% url "user:register_exist" %}?uemail='+$('#email').val(),function(data){
-                if (data.email_count >= 1) {
-                    $('#email').next().html('邮箱已经存在').show();
-                    error_email = true;
-                }else{
-                    $('#email').next().hide();
-                    error_email = false;
+            $('#allow').click(function () {
+                if ($(this).is(':checked')) {
+                    error_check = false;
+                    $(this).siblings('span').hide();
+                } else {
+                    error_check = true;
+                    $(this).siblings('span').html('请勾选同意');
+                    $(this).siblings('span').show();
                 }
             });
-		}
-
-	}
 
 
-	$('#reg_form').submit(function() {
-		check_age();
-		check_statur();
+            function check_age() {
+                var len = $('#age').val().length;
 
+                if (len < 4) {
+                    $('#age').next().html('请输入年龄');
+                    $('#age').next().show();
+                    err_age = true;
 
-		if(error_age == false && error_statur == false)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+                } else {
+                    err_age = false;
+                }
+            }
 
-	});
-    });
+            function check_statur() {
+                var len = $('#statur').val().length;
+
+                if (len <= 0) {
+                    $('#statur').next().html('请输入身高');
+                    $('#statur').next().show();
+                    err_age = true;
+
+                } else {
+                    err_age = false;
+                }
+            }
+
+            function check_pwd() {
+                var len = $('#pwd').val().length;
+                if (len < 4 || len > 20) {
+                    $('#pwd').next().html('密码最少4位，最长20位');
+                    $('#pwd').next().show();
+                    error_password = true;
+                } else {
+                    $('#pwd').next().hide();
+                    error_password = false;
+                }
+            }
+
+            function check_cpwd() {
+                var pass = $('#pwd').val();
+                var cpass = $('#cpwd').val();
+
+                if (pass != cpass) {
+                    $('#cpwd').next().html('两次输入的密码不一致');
+                    $('#cpwd').next().show();
+                    error_check_password = true;
+                } else {
+                    $('#cpwd').next().hide();
+                    error_check_password = false;
+                }
+            }
+
+            function check_email() {
+                var re = /^[a-z0-9][\w\.\-]*@[a-z0-9\-]+(\.[a-z]{2,5}){1,2}$/;
+                if (!re.test($('#email').val())) {
+                    $('#email').next().html('你输入的邮箱格式不正确');
+                    $('#email').next().show();
+                    error_email = true;
+                } else {
+                    $.get('{% url "user:register_exist" %}?uemail=' + $('#email').val(), function (data) {
+                        if (data.email_count >= 1) {
+                            $('#email').next().html('邮箱已经存在').show();
+                            error_email = true;
+                        } else {
+                            $('#email').next().hide();
+                            error_email = false;
+                        }
+                    });
+                }
+
+            }
+
+            $('#reg_form').submit(function () {
+                check_age();
+                check_statur();
+
+                if (error_age == false && error_statur == false) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            var BMIData = $('.bodyResultBMI').text();
+            if (Number(BMIData) > 32) {
+                BMIData = "32"
+            }
+            if (Number(BMIData) < 15) {
+                BMIData = "15"
+            }
+            var cursorLeft = ((Number(BMIData) - 15) * 37) + "px";
+            $('.currentCursor').css({left: cursorLeft})
+        });
     </script>
 {% endblock head %}
 
 
 {% block center_body %}
     <div class="navbar_con">
-		<div class="navbar">
-			<ul class="navlist fl">
-				<li><a href="{% url "user:index" %}">Personal health information</a></li>
-			</ul>
+        <div class="navbar">
             <ul class="navlist fl">
-				<li><a href="{% url "user:figure" %}">Personal health information statistics</a></li>
-			</ul>
+                <li><a href="{% url "user:index" %}">Personal health information</a></li>
+            </ul>
             <ul class="navlist fl">
-				<li><a href="{% url "user:predict" %}">the outcome of predict</a></li>
-			</ul>
-		</div>
-	</div>
+                <li><a href="{% url "user:figure" %}">Personal health information statistics</a></li>
+            </ul>
+            <ul class="navlist fl">
+                <li><a class="act" href="{% url "user:predict" %}">the outcome of predict</a></li>
+            </ul>
+        </div>
+    </div>
     <div class="Content-Main">
-            <a>{{ message }}</a>
+        <a>{{ message }}</a>
+        <br>
+        <a style="cursor: pointer;font-size:18px">{{ xueya }}</a>
+        <br>
+        <a style="cursor: pointer;font-size:18px"
+           href="https://www.bhf.org.uk/informationsupport/risk-factors/high-blood-pressure#Heading7">The results are
+            referenced to：bhf.org.uk</a>
+        <br>
+        <div class="bodyResult">
+            <span class="bodyResultBMITitle">BMI:</span>
+            <span class="bodyResultBMI">{{ bim }}</span>
+            <span class="bodyResultTips">{{ isHel }}</span>
+            <div class="BMIBox">
+                <div class="currentCursor">▼</div>
+                <img src="../../static/images/BMI.png">
+                <div class="cursor1">18.5</div>
+                <div class="cursor2">25</div>
+                <div class="cursor3">30</div>
+            </div>
+            <a style="pxcursor: pointer;font-size: 18px;top: 265px;left: 630px;"
+               href="https://www.nhs.uk/common-health-questions/lifestyle/what-is-the-body-mass-index-bmi/ ">The results
+                are
+                referenced to nhs.uk</a>
+            <div style="cursor: pointer;font-size:18px;position: absolute;top: 300px;">{{ bimt }}</div>
+
+        </div>
     </div>
 
 {% endblock center_body %}

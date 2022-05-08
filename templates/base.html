@@ -1,9 +1,11 @@
 {% extends 'base_foot.html' %}
 
 {% block body %}
+
     <div class="header_con" id="header_con">
 		<div class="header">
 			<div class="welcome fl">welcome to the website!</div>
+
 			<div class="fr">
 {#                判断是否已经登录#}
                 {% if request.session.user_name|default:'' != '' %}
@@ -12,7 +14,7 @@
 
 {#                    class="login_info fl"#}
 				<div class="login_btn fl">
-                    <font color="#ff4500">{{ request.session.user_name }}</font>
+                    <font color="#ff4500">username:{{ request.session.user_name }}</font>
 				</div>
                 <div class="login_btn fl">
                     <span>|</span>

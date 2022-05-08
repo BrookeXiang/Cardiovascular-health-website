@@ -7,6 +7,12 @@
     .main, .main1, .main2, .main3{
         display: inline-block;
     }
+
+    </style>
+    <style>
+        .act{
+        color: #eb5424 !important;
+    }
     </style>
 
 {% endblock head %}
@@ -19,29 +25,61 @@
 				<li><a href="{% url "user:index" %}">Personal health information</a></li>
 			</ul>
             <ul class="navlist fl">
-				<li><a href="{% url "user:figure" %}">Personal health information statistics</a></li>
+				<li><a class="act" href="{% url "user:figure" %}">Personal health information statistics</a></li>
 			</ul>
             <ul class="navlist fl">
 				<li><a href="{% url "user:predict" %}">the outcome of predict</a></li>
 			</ul>
 		</div>
 	</div>
-    <div style="margin-left:30%;margin-top:10px;margin-bottom: 10px;font-size: 20px;color: #00bc6f">the height change：</div>
-    <div class='main' id="main" style="margin-left:30%;width: 600px;height:400px;">
+{#    <div style="margin-left:30%;margin-top:10px;margin-bottom: 10px;font-size: 20px;color: #00bc6f">the height change：</div>#}
+{#    <div class='main' id="main" style="margin-left:30%;width: 600px;height:400px;">#}
+{#        <img src="../../static/images/image.png" style="width: 600px;height: 400px;overflow: hidden;object-fit: cover;" alt="">#}
+{#    </div>#}
+{#    <div style="margin-left:30%;margin-top:10px;margin-bottom: 10px;font-size: 20px;color: #00bc6f">the weight change：</div>#}
+{#    <div class='main1' id="main" style="margin-left:30%; width: 600px;height:400px;">#}
+{#        <img src="../../static/images/image1.png" style="width: 600px;height: 400px;overflow: hidden;object-fit: cover;" alt="">#}
+{#    </div>#}
+{#    <div style="margin-left:30%;margin-top:10px;margin-bottom: 10px;font-size: 20px;color: #00bc6f">the blood pressure change：</div>#}
+{#    <div class='main2' id="main" style="margin-left:30%; width: 600px;height:400px;">#}
+{#        <img src="../../static/images/image2.png" style="width: 600px;height: 400px;overflow: hidden;object-fit: cover;" alt="">#}
+{#    </div>#}
+{#    <div class='main3' id="main" style="margin-left:30%; width: 600px;height:400px;">#}
+{#        <img src="../../static/images/image3.png" style="width: 600px;height: 400px;overflow: hidden;object-fit: cover;" alt="">#}
+{#    </div>#}
+
+    <div>
+    <div style="display: flex;
+justify-content:space-evenly;">
+        <div>
+         <div style="margin-left:30%;margin-top:10px;margin-bottom: 10px;font-size: 20px;color: #00bc6f">the height change：</div>
+    <div class='main' id="main" style="width: 600px;height:400px;">
         <img src="../../static/images/image.png" style="width: 600px;height: 400px;overflow: hidden;object-fit: cover;" alt="">
     </div>
+        </div>
+        <div>
     <div style="margin-left:30%;margin-top:10px;margin-bottom: 10px;font-size: 20px;color: #00bc6f">the weight change：</div>
-    <div class='main1' id="main" style="margin-left:30%; width: 600px;height:400px;">
+    <div class='main1' id="main" style=" width: 600px;height:400px;">
         <img src="../../static/images/image1.png" style="width: 600px;height: 400px;overflow: hidden;object-fit: cover;" alt="">
     </div>
+            </div>
+        </div>
+        <div style="display: flex;
+justify-content:space-evenly;">
+            <div>
     <div style="margin-left:30%;margin-top:10px;margin-bottom: 10px;font-size: 20px;color: #00bc6f">the blood pressure change：</div>
-    <div class='main2' id="main" style="margin-left:30%; width: 600px;height:400px;">
+    <div class='main2' id="main" style="width: 600px;height:400px;">
         <img src="../../static/images/image2.png" style="width: 600px;height: 400px;overflow: hidden;object-fit: cover;" alt="">
     </div>
-    <div class='main3' id="main" style="margin-left:30%; width: 600px;height:400px;">
+     </div>
+     <div>
+    <div class='main3' id="main" style="width: 600px;height:400px;">
+        <div style="margin-left:30%;margin-top:10px;margin-bottom: 10px;font-size: 20px;color: #00bc6f">the diastolicpress change：</div>
         <img src="../../static/images/image3.png" style="width: 600px;height: 400px;overflow: hidden;object-fit: cover;" alt="">
     </div>
-
+     </div>
+        </div>
+    </div>
 
 
 {% endblock center_body %}

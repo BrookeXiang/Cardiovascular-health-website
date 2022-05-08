@@ -2,79 +2,17 @@
 
 {% block head %}
     <script type="text/javascript" src="/static/js/index.js"></script>
-    <script type="text/javascript">
-
-    $(function(){
-
-	var error_age = true;
-	var error_statur = false;
-
-    alret('is action')
-	$('#age').blur(function() {
-		check_age();
-	});
-
-	$('#statur').blur(function() {
-		check_statur();
-	});
-
-
-	function check_age(){
-		var len = $('#age').val().length;
-
-		if(len==0)
-		{
-			$('#age').next().html('请输入年龄');
-			$('#age').next().show();
-            err_age = true;
-
-		}
-		else
-		{
-			err_age = false;
-        }
-	}
-    function check_statur(){
-		var len = $('#statur').val().length;
-
-		if(len==0)
-		{
-			$('#statur').next().html('请输入身高');
-			$('#statur').next().show();
-            err_age = true;
-
-		}
-		else
-		{
-			err_age = false;
-        }
-	}
-
-	$('#reg_form').submit(function() {
-        alert('action')
-		check_age();
-		check_statur();
-
-
-		if(error_age == false && error_statur == false)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-
-	});
-    });
-    </script>
 
     <style type="text/css">
-        .Content-Main{
+        .act {
+            color: #eb5424 !important;
+        }
+
+        .Content-Main {
             max-width: 700px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            margin-left: 25%;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            margin-left: 31%;
             border: none;
             border-radius: 5px;
             -moz-border-radius: 5px;
@@ -84,39 +22,48 @@
             color: white;
             background: #00C6D7;
         }
-        .Content-Main h1{
 
-            padding: 8px 0px 40px 10px;
+        .Content-Main h1 {
+            font-size: 30px;
+            padding: 15px 0px 20px 20px;
             display: block;
             border-bottom: 1px solid #444;
         }
-        .text1{
+
+        .text1 {
             margin-left: 3px;
-            font-size:20px;color:white;font-weight:bold;font-family:kaiti
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            font-family: kaiti
 
         }
-        .Content-Main label{
+
+        .Content-Main label {
             margin: 10px 5px 10px;
             display: block;
         }
-        .fileInputContainer{
+
+        .fileInputContainer {
             height: 99px;
             width: 99px;
-            margin: 20px 20px 20px 20px ;
+            margin: 20px 20px 20px 20px;
             border: none;
             overflow: hidden;
             position: relative;
         }
-        .fileInput{
+
+        .fileInput {
             height: 106px;
             border: none;
             font-size: 300px;
             opacity: 0;
-            filter:alpha(opacity=0);
+            filter: alpha(opacity=0);
             cursor: pointer;
             position: absolute;
         }
-        .Content-Main label>span{
+
+        .Content-Main label > span {
             width: 20%;
             float: left;
             text-align: right;
@@ -125,22 +72,19 @@
             font-weight: bold;
         }
 
-        {#.houspan{#}
-        {#    float: right;#}
-        {#    margin-top: 10px;#}
-        {#    font-weight: bold;#}
-        {#}#}
-        .Main-sex{
+        .Main-sex {
             padding-right: 13px;
             padding-bottom: 13px;
             font-weight: bold;
             line-height: 4px;
         }
-        .Main-sex input[type=checkbox]{
-            margin-top:6px;
-            vertical-align:middle;
+
+        .Main-sex input[type=checkbox] {
+            margin-top: 6px;
+            vertical-align: middle;
         }
-        .Content-Main input[type="text"],.Content-Main input[type="email"],.Content-Main textarea{
+
+        .Content-Main input[type="text"], .Content-Main input[type="email"], .Content-Main textarea {
             height: 25px;
             width: 50%;
             line-height: 15px;
@@ -149,22 +93,30 @@
             margin-right: 6px;
             margin-top: 2px;
             border: none;
-            border-radius:2px;
-            -webkit-border-radius:2px;
-            -moz-border-radius:2px;
+            border-radius: 2px;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
             outline: 0 none;
-            background:  white;
+            background: white;
             color: #525252;
         }
-        .Content-Main textarea{
+
+        .Content-Main textarea {
             height: 100px;
             width: 70%;
             padding: 5px 0px 0px 5px;
         }
+
         .error_tip {
-            float:left;foint-size:1px;height:30px;line-height:30px;margin-left:70px;color:#e62e2e;
+            float: left;
+            foint-size: 1px;
+            height: 30px;
+            line-height: 30px;
+            margin-left: 70px;
+            color: #e62e2e;
         }
-        .Content-Main .button{
+
+        .Content-Main .button {
             padding: 8px 24px 8px 24px;
             margin-bottom: 8px;
             margin-left: 280px;
@@ -174,15 +126,29 @@
             -webkit-border-radius: 4px;
             font-weight: bold;
             text-shadow: 1px 1px 1px #FFE477;
-            box-shadow: 1px 1px 1px  #3D3D3D;
-            -moz-box-shadow: 1px 1px 1px  #3D3D3D;
-            -webkit-box-shadow: 1px 1px 1px  #3D3D3D;
+            box-shadow: 1px 1px 1px #3D3D3D;
+            -moz-box-shadow: 1px 1px 1px #3D3D3D;
+            -webkit-box-shadow: 1px 1px 1px #3D3D3D;
             color: #585858;
             background: #f6ff0a;
         }
-        .Content-Main .button:hover{
-            color:  #333;
-            background-color:  #EBEBEB ;
+
+        .Content-Main .button:hover {
+            color: #333;
+            background-color: #EBEBEB;
+        }
+
+        .Content-Main input[type="text"] {
+            border-radius: 10px;
+        }
+
+        select {
+            border-radius: 5px;
+            width: 270px;
+        }
+        .msgTips{
+            display:inline-block;
+            color: red;
         }
     </style>
 
@@ -191,32 +157,32 @@
 
 {% block center_body %}
     <div class="navbar_con">
-		<div class="navbar">
-			<ul class="navlist fl">
-				<li><a href="{% url "user:index" %}">Personal health information</a></li>
-			</ul>
+        <div class="navbar">
             <ul class="navlist fl">
-				<li><a href="{% url "user:figure" %}">Personal health information statistics</a></li>
-			</ul>
+                <li><a class="act" href="{% url "user:index" %}">Personal health information</a></li>
+            </ul>
             <ul class="navlist fl">
-				<li><a href="{% url "user:predict" %}">the outcome of predict</a></li>
-			</ul>
-		</div>
-	</div>
+                <li><a href="{% url "user:figure" %}">Personal health information statistics</a></li>
+            </ul>
+            <ul class="navlist fl">
+                <li><a href="{% url "user:predict" %}">the outcome of predict</a></li>
+            </ul>
+        </div>
+    </div>
     <div class="Content-Main">
-            <form action="{% url "user:form" %}" id="reg_form" method="post" class="form-userInfo">
-                {% csrf_token %}
-                <h1>personal information</h1>
-                <p>
+        <form action="{% url "user:form" %}" id="reg_form" method="post" class="form-userInfo">
+            {% csrf_token %}
+            <h1>personal information</h1>
                 <label>
                     <span>age:</span>
                     <input type="text" name="age" id="age" placeholder="please enter age">
+                    <div class="msgTips"></div>
                 </label>
                 <label class="Main-sex">
                     <span>sex:</span>
 
                     <select name="select1" style="zoom:130%">
-                        <option  selected="selected">--select--</option>
+                        <option selected="selected">--select--</option>
                         <option value="1">male</option>
                         <option value="2">female</option>
                     </select>
@@ -224,32 +190,38 @@
                 </label>
                 <label>
                     <span>stature:</span>
-                    <input type="text"  name="statur" placeholder="please enter height">
+                    <input type="text" name="stature" id="stature" placeholder="please enter height">
+                    <div class="msgTips"></div>
                 </label>
                 <label>
                     <span>weight:</span>
-                    <input type="text"  name="weight" placeholder="please enter weight">
+                    <input type="text" name="weight" id="weight" placeholder="please enter weight">
+                    <div class="msgTips"></div>
                 </label>
                 <label>
                     <span>systolicpress:</span>
-                    <input type="text"  name="systolicpress" placeholder="please enter systolicpress">
+                    <input type="text" name="systolicpress" id="systolicpress" placeholder="please enter systolicpress">
+                    <div class="msgTips"></div>
                 </label>
                 <label>
                     <span>diastolicpress:</span>
-                    <input type="text"  name="diastolicpress" placeholder="please enter diastolicpress">
+                    <input type="text" name="diastolicpress" id="diastolicpress" placeholder="please enter diastolicpress">
+                    <div class="msgTips"></div>
                 </label>
                 <label>
                     <span>cholesterol:</span>
-                    <input type="text"  name="cholesterol" placeholder="please enter cholesterol">
+                    <input type="text" name="cholesterol"  id="cholesterol" placeholder="please enter cholesterol">
+                    <div class="msgTips"></div>
                 </label>
                 <label>
                     <span>bloodglucose:</span>
-                    <input type="text"  name="bloodglucose" placeholder="please enter bloodglucose">
+                    <input type="text" name="bloodglucose" id="bloodglucose" placeholder="please enter bloodglucose">
+                    <div class="msgTips"></div>
                 </label>
                 <label class="Main-sex">
                     <span>smoking:</span>
                     <select name="select2" style="zoom:130%">
-                        <option  selected="selected">--select--</option>
+                        <option selected="selected">--select--</option>
                         <option value="1">yes</option>
                         <option value="2">no</option>
                     </select>
@@ -257,7 +229,7 @@
                 <label class="Main-sex">
                     <span>drinking:</span>
                     <select name="select3" style="zoom:130%">
-                        <option  selected="selected">--select--</option>
+                        <option selected="selected">--select--</option>
                         <option value="1">yes</option>
                         <option value="2">no</option>
                     </select>
@@ -265,7 +237,7 @@
                 <label class="Main-sex">
                     <span>sports:</span>
                     <select name="select4" style="zoom:130%">
-                        <option  selected="selected">--select--</option>
+                        <option selected="selected">--select--</option>
                         <option value="1">yes</option>
                         <option value="2">no</option>
                     </select>
@@ -274,7 +246,7 @@
                     <input type="submit" name="" value="submit" class="button">
                 </label>
 
-            </form>
+        </form>
     </div>
 
 {% endblock center_body %}

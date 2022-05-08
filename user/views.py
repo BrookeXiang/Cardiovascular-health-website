@@ -4,7 +4,7 @@ from random import Random
 from trans import *
 from django.shortcuts import render, redirect, HttpResponseRedirect, reverse
 from django.core.paginator import Paginator
-from django.http import JsonResponse,HttpResponse
+from django.http import JsonResponse, HttpResponse
 import numpy as np
 import matplotlib.pyplot as plt
 import nw
@@ -13,14 +13,13 @@ from hashlib import sha1
 
 from django.contrib import messages
 
-from .models import UserInfo,HealthInformation
+from .models import UserInfo, HealthInformation
 from . import user_decorator
 
 from django.core.mail import send_mail
 
 
 def register(request):
-
     context = {
         'title': '用户注册',
     }
@@ -28,7 +27,6 @@ def register(request):
 
 
 def register_handle(request):
-
     username = request.POST.get('user_name')
     password = request.POST.get('pwd')
     confirm_pwd = request.POST.get('confirm_pwd')
@@ -56,9 +54,9 @@ def register_exist(request):
     username = request.GET.get('uname')
     uemail = request.GET.get('uemail')
     count = UserInfo.objects.filter(u_name=username).count()
-    email_count=UserInfo.objects.filter(u_email=uemail).count()
+    email_count = UserInfo.objects.filter(u_email=uemail).count()
     print(email_count)
-    return JsonResponse({'count': count,'email_count':email_count})
+    return JsonResponse({'count': count, 'email_count': email_count})
 
 
 def login(request):
@@ -72,9 +70,11 @@ def login(request):
     }
     return render(request, 'user/login.html', context)
 
-#验证码显示
+
+# 验证码显示
 def verify_show(request):
-    return render(request,'user/login.html')
+    return render(request, 'user/login.html')
+
 
 def login_handle(request):  # 没有利用ajax提交表单
     # 接受请求信息
@@ -104,11 +104,11 @@ def login_handle(request):  # 没有利用ajax提交表单
                 'title': '用户名登陆',
                 'error_name': 0,
                 'error_pwd': 0,
-                'error_vc':1,
+                'error_vc': 1,
                 'uname': uname,
                 'upwd': upwd,
                 'user': user,
-                'vc':vc,
+                'vc': vc,
             }
             return render(request, 'user/login.html', context)
         elif user[0].u_name_passOrfail == False:
@@ -120,7 +120,7 @@ def login_handle(request):  # 没有利用ajax提交表单
                 'user': user,
                 'vc': vc,
             }
-            return render(request, 'user/login.html',context)
+            return render(request, 'user/login.html', context)
         else:
             context = {
                 'title': '用户名登陆',
@@ -129,7 +129,7 @@ def login_handle(request):  # 没有利用ajax提交表单
                 'error_vc': 1,
                 'uname': uname,
                 'upwd': upwd,
-                'user':user,
+                'user': user,
                 'vc': vc,
             }
             return render(request, 'user/login.html', context)
@@ -151,8 +151,9 @@ def logout(request):  # 用户登出
     request.session.flush()  # 清空当前用户所有session
     return redirect(reverse("user:index"))
 
-#修改密码
-#随机生成验证码
+
+# 修改密码
+# 随机生成验证码
 def random_str(randomlength=8):
     str = ''
     chars = 'abcdefghijklmnopqrstuvwsyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
@@ -161,12 +162,14 @@ def random_str(randomlength=8):
     for i in range(randomlength):
         str += chars[random.randint(0, length)]
     return str
-#发送邮件重置密码
+
+
+# 发送邮件重置密码
 def findpwdView(request):
     context = {
         'title': '重置密码',
     }
-    if request.method=="POST":
+    if request.method == "POST":
         username = request.POST.get("username")
         email = request.POST.get("email")
         print("username:%s" % (username))
@@ -184,8 +187,8 @@ def findpwdView(request):
             request.session["code"] = code  # 将验证码保存到session
             email_body = "您的密码已重置，为了您的账号安全，请勿将密码泄露。新的密码为：{0}".format(code)
             # send_mail的参数分别是 邮件标题，邮件内容，发件箱(settings.py中设置过的那个)，收件箱列表(可以发送给多个人),失败静默(若发送失败，报错提示我们)
-            send_status = send_mail(email_title, email_body, 'woaisilaowu@163.com', [email],fail_silently=False)
-            code=request.session["code"] #获取传递过来的验证码
+            send_status = send_mail(email_title, email_body, 'woaisilaowu@163.com', [email], fail_silently=False)
+            code = request.session["code"]  # 获取传递过来的验证码
             # 密码加密
             s1 = sha1()
             s1.update(code.encode('utf8'))
@@ -197,8 +200,9 @@ def findpwdView(request):
         else:
             messages.success(request, "用户邮箱与输入邮件不匹配，重置失败！")
 
-        return render(request,"user/change_password1.html",context)
-    return render(request, "user/change_password1.html",context)
+        return render(request, "user/change_password1.html", context)
+    return render(request, "user/change_password1.html", context)
+
 
 def index(request):
     # 查询各个分类的最新4条，最热4条数据
@@ -210,13 +214,12 @@ def index(request):
     # 展示回复消息
     # persons1=Information.objects.filter(cusername=cusername).values('cusername1').distinct().order_by('cusername1')
 
-
-
     context = {
         'title': '首页',
     }
 
     return render(request, 'user/index.html', context)
+
 
 def form(request):
     message = ""
@@ -226,7 +229,7 @@ def form(request):
     user = UserInfo.objects.filter(u_name=username).first()
     uage = request.POST.get('age')
     usex = request.POST.get('select1')
-    ustatur = request.POST.get('statur')
+    stature = request.POST.get('stature')
     uweight = request.POST.get('weight')
     usystolicpress = request.POST.get('systolicpress')
     udiastolicpress = request.POST.get('diastolicpress')
@@ -243,7 +246,7 @@ def form(request):
     print('----------------------------')
     if usex == '--select--':
         message.append("please input sex;")
-    if ustatur == '':
+    if stature == '':
         message.append("please input height;")
     if uweight == '':
         message.append("please input weight; ")
@@ -264,7 +267,7 @@ def form(request):
     if len(message) == 0:
         if isInter(uage) == False:
             message.append("age must be interger number;")
-        if isFloat(ustatur) == False:
+        if isFloat(stature) == False:
             message.append("statur must be number;")
         if isFloat(uweight) == False:
             message.append("weight must be number;")
@@ -282,7 +285,7 @@ def form(request):
         info = HealthInformation.objects.create(i_user=user)
         info.i_age = int(uage)
         info.i_sex = int(usex)
-        info.i_statur = float(ustatur)
+        info.i_statur = float(stature)
         info.i_weight = float(uweight)
         info.i_systolicpress = float(usystolicpress)
         info.i_diastolicpress = float(udiastolicpress)
@@ -303,14 +306,14 @@ def form(request):
     else:
         context = {
             'title': 'index',
-            'message_text':'submilt failed',
+            'message_text': 'submilt failed',
             'message': message
         }
 
         return render(request, 'user/form.html', context)
 
-def figure(request):
 
+def figure(request):
     username = request.session.get('user_name')
     healthinfo = HealthInformation.objects.filter(i_user__u_name=username).order_by('-i_time')
     cishu = []
@@ -320,14 +323,13 @@ def figure(request):
     shuzhang = []
 
     for i, info in enumerate(healthinfo):
-        cishu.append(i+1)
-        tall.insert(0,float(info.i_statur))
+        cishu.append(i + 1)
+        tall.insert(0, float(info.i_statur))
         weight.insert(0, float(info.i_weight))
-        shousuo.insert(0,float(info.i_systolicpress))
-        shuzhang.insert(0,float(info.i_diastolicpress))
+        shousuo.insert(0, float(info.i_systolicpress))
+        shuzhang.insert(0, float(info.i_diastolicpress))
         if i == 11:
             break
-
 
     plt.figure()
     for i in range(len(cishu)):
@@ -336,13 +338,10 @@ def figure(request):
 
     plt.legend()
 
-
     plt.xlabel('num')
     plt.xticks(cishu)
 
-
     plt.ylabel('value')
-
 
     plt.savefig('./static/images/image.png')
 
@@ -363,9 +362,10 @@ def figure(request):
     for i in range(len(cishu)):
         plt.annotate(str(tall[i]), xy=(cishu[i], shousuo[i]), xytext=(cishu[i], shousuo[i] + 0.05))
     plt.plot(cishu, shousuo, marker='*', color='b', label='systolicpress')
+    plt.plot([1, max(cishu)], [90, 90], label='low')
+    plt.plot([1, max(cishu)], [140, 140], label='Possible hypertension')
 
     plt.legend()
-
     plt.xlabel('num')
     plt.xticks(cishu)
 
@@ -376,6 +376,8 @@ def figure(request):
     for i in range(len(cishu)):
         plt.annotate(str(tall[i]), xy=(cishu[i], shuzhang[i]), xytext=(cishu[i], shuzhang[i] + 0.05))
     plt.plot(cishu, shuzhang, marker='*', color='b', label='diastolicpress')
+    plt.plot([1, max(cishu)], [60, 60], label='low')
+    plt.plot([1, max(cishu)], [90, 90], label='Possible hypertension')
 
     plt.legend()
 
@@ -396,6 +398,7 @@ def figure(request):
         'shuzhang': shuzhang,
     }
     return render(request, 'user/figure.html', context)
+
 
 def predict(request):
     list = []
@@ -430,19 +433,39 @@ def predict(request):
         list.append(float(healthinfo.i_sport))
 
     result = nw.predict(list)
+    bim = float(healthinfo.i_weight) / (float(healthinfo.i_statur / 100) * float(healthinfo.i_statur / 100))
+
+    bimt = ""
+    if bim > 25 or bim < 18.5:
+        bimt = ("Your BMI is in the abnormal range,suitable for your weight: " + str("{:0.2f}kg"
+                                                                                     ) + "-" + str("{:0.2f}kg")).format(
+            18.5 * (float(healthinfo.i_statur / 100) * float(healthinfo.i_statur / 100)),
+            25 * (float(healthinfo.i_statur / 100) * float(healthinfo.i_statur / 100)))
+
+    else:
+        bimt = "Your BMI is in the normal range"
 
     if result == False:
         context = {
+            'xueya': "Your systolic pressure is " +
+                     str(float(healthinfo.i_systolicpress))
+                     + "(Normal lower than 140 mmHg)  and your diastolic pressure is "
+                     + str(float(healthinfo.i_diastolicpress)) +
+                     "(Normal lower than 90 mmHg)",
+            'bim': "{:0.2f}".format(bim),
+            "bimt": bimt,
             'message': 'you are at high risk and a full medical examination is recommended',
         }
         return render(request, 'user/predict.html', context)
     else:
         context = {
+            'xueya': "Your systolic pressure is " +
+                     str(float(healthinfo.i_systolicpress))
+                     + "(Normal lower than 140 mmHg)  and your diastolic pressure is "
+                     + str(float(healthinfo.i_diastolicpress)) +
+                     "(Normal lower than 90 mmHg)",
+            'bim': "{:0.2f}".format(bim),
+            "bimt": bimt,
             'message': 'Congratulations, you are at low risk',
         }
         return render(request, 'user/predict.html', context)
-
-
-
-
-

@@ -4,7 +4,10 @@ import scipy.ndimage
 import pickle
 import matplotlib.pylab as plt
 import pickle
-save_file =  "./mnist.pkl"
+
+save_file = "./mnist.pkl"
+
+
 class neuralNetwork:
     def __init__(self, inputnodes, hiddennodes, outputnodes, learningrate):
         self.inodes = inputnodes
@@ -15,7 +18,7 @@ class neuralNetwork:
         self.lr = learningrate
         self.activation_function = lambda x: scipy.special.expit(x)
         pass
-    
+
     def train(self, inputs_list, targets_list):
         inputs = numpy.array(inputs_list, ndmin=2).T
         targets = numpy.array(targets_list, ndmin=2).T
@@ -25,12 +28,14 @@ class neuralNetwork:
         final_outputs = self.activation_function(final_inputs)
         output_errors = targets - final_outputs
         hidden_errors = numpy.dot(self.who.T, output_errors)
-        self.who += self.lr * numpy.dot((output_errors * final_outputs * (1.0 - final_outputs)), numpy.transpose(hidden_outputs))
-        self.wih += self.lr * numpy.dot((hidden_errors * hidden_outputs * (1.0 - hidden_outputs)), numpy.transpose(inputs))
+        self.who += self.lr * numpy.dot((output_errors * final_outputs * (1.0 - final_outputs)),
+                                        numpy.transpose(hidden_outputs))
+        self.wih += self.lr * numpy.dot((hidden_errors * hidden_outputs * (1.0 - hidden_outputs)),
+                                        numpy.transpose(inputs))
         pass
 
-    def log_loss(self,y_hat, y):
-        return -(y*(self.activation_function(y_hat) + (1 - y) * self.activation_function(1 - y_hat)))
+    def log_loss(self, y_hat, y):
+        return -(y * (self.activation_function(y_hat) + (1 - y) * self.activation_function(1 - y_hat)))
 
     def query(self, inputs_list):
         inputs = numpy.array(inputs_list, ndmin=2).T
@@ -40,12 +45,13 @@ class neuralNetwork:
         final_outputs = self.activation_function(final_inputs)
         return final_outputs
 
+
 def train_modal(epochs=1):
     input_nodes = 12
     hidden_nodes = 200
     output_nodes = 1
     learning_rate = 0.01
-    n = neuralNetwork(input_nodes,hidden_nodes,output_nodes, learning_rate)
+    n = neuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
     training_data_file = open("mnist_dataset/cardio_train.csv", 'r')
     training_data_list = training_data_file.read().splitlines()
     training_data_file.close()
@@ -60,19 +66,21 @@ def train_modal(epochs=1):
             if key == 0:
                 continue
             targets = numpy.array([all_values[12]], dtype=float)
-            inputs =  numpy.array(all_values[0:12], dtype=float)
+            inputs = numpy.array(all_values[0:12], dtype=float)
             n.train(inputs, targets)
     pickle.dump(n.wih, open(f'./wih_value.pkl', 'wb'))
     pickle.dump(n.who, open(f'./who_value.pkl', 'wb'))
 
+
 def loadNwValue(nn):
-    print(nn.wih)
+    # print(nn.wih)
     val1 = pickle.load(open(f'./wih_value.pkl', 'rb'))
     val2 = pickle.load(open(f'./who_value.pkl', 'rb'))
     nn.wih = val1
     nn.who = val2
-    print(nn.wih)
+    # print(nn.wih)
     return nn
+
 
 def predict(list):
     input_nodes = 12
@@ -87,6 +95,7 @@ def predict(list):
     else:
         return False
 
+
 if __name__ == '__main__':
     input_nodes = 12
     hidden_nodes = 200
@@ -94,4 +103,3 @@ if __name__ == '__main__':
     learning_rate = 0.01
     n = neuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
     loadNwValue(n)
-
