@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/static/js/slide.js"></script>
+    <style type="text/javascript">
+    .main, .main1, .main2, .main3{
+        display: inline-block;
+    }
+    </style>
+
+{% endblock head %}
+
+
+{% block center_body %}
+    <div class="navbar_con">
+		<div class="navbar">
+			<ul class="navlist fl">
+				<li><a href="{% url "user:index" %}">个人健康信息管理</a></li>
+			</ul>
+            <ul class="navlist fl">
+				<li><a href="{% url "user:figure" %}">个人健康信息一览</a></li>
+			</ul>
+            <ul class="navlist fl">
+				<li><a href="{% url "user:predict" %}">诊断结果</a></li>
+			</ul>
+		</div>
+	</div>
+    <div style="margin-left:30%;margin-top:10px;margin-bottom: 10px;font-size: 20px;color: #00bc6f">身高变化一览：</div>
+    <div class='main' id="main" style="margin-left:30%;width: 600px;height:400px;">
+        <img src="../../static/images/image.png" style="width: 600px;height: 400px;overflow: hidden;object-fit: cover;" alt="">
+    </div>
+    <div style="margin-left:30%;margin-top:10px;margin-bottom: 10px;font-size: 20px;color: #00bc6f">体重变化一览：</div>
+    <div class='main1' id="main" style="margin-left:30%; width: 600px;height:400px;">
+        <img src="../../static/images/image1.png" style="width: 600px;height: 400px;overflow: hidden;object-fit: cover;" alt="">
+    </div>
+    <div style="margin-left:30%;margin-top:10px;margin-bottom: 10px;font-size: 20px;color: #00bc6f">血压变化一览：</div>
+    <div class='main2' id="main" style="margin-left:30%; width: 600px;height:400px;">
+        <img src="../../static/images/image2.png" style="width: 600px;height: 400px;overflow: hidden;object-fit: cover;" alt="">
+    </div>
+    <div class='main3' id="main" style="margin-left:30%; width: 600px;height:400px;">
+        <img src="../../static/images/image3.png" style="width: 600px;height: 400px;overflow: hidden;object-fit: cover;" alt="">
+    </div>
+
+
+
+{% endblock center_body %}

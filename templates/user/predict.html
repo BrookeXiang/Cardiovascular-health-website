@@ -286,77 +286,7 @@
 		</div>
 	</div>
     <div class="Content-Main">
-            <form action="{% url "user:form" %}" id='reg_form' method="post" class="form-userInfo">
-                {% csrf_token %}
-                <h1>个人信息</h1>
-                <p>
-                <label>
-                    <span>年龄:</span>
-                    <input type="text" name="age" id="age" placeholder="请输入您的年龄">
-                </label>
-                <label class="Main-sex">
-                    <span>性别:</span>
-
-                    <select name="select1" style="zoom:130%">
-                        <option  selected="selected">--请选择--</option>
-                        <option value="1">男</option>
-                        <option value="2">女</option>
-                    </select>
-
-                </label>
-                <label>
-                    <span>身高:</span>
-                    <input type="text"  name="statur" placeholder="请输入您的身高">
-                </label>
-                <label>
-                    <span>体重:</span>
-                    <input type="text"  name="weight" placeholder="请输入您的体重">
-                </label>
-                <label>
-                    <span>收缩压:</span>
-                    <input type="text"  name="systolicpress" placeholder="请输入您的收缩压">
-                </label>
-                <label>
-                    <span>舒张压:</span>
-                    <input type="text"  name="diastolicpress" placeholder="请输入您的舒张压">
-                </label>
-                <label>
-                    <span>胆固醇:</span>
-                    <input type="text"  name="cholesterol" placeholder="请输入您的胆固醇">
-                </label>
-                <label>
-                    <span>血糖:</span>
-                    <input type="text"  name="bloodglucose" placeholder="请输入您的血糖">
-                </label>
-                <label class="Main-sex">
-                    <span>是否吸烟:</span>
-                    <select name="select2" style="zoom:130%">
-                        <option  selected="selected">--请选择--</option>
-                        <option value="1">是</option>
-                        <option value="2">否</option>
-                    </select>
-                </label>
-                <label class="Main-sex">
-                    <span>是否饮酒:</span>
-                    <select name="select3" style="zoom:130%">
-                        <option  selected="selected">--请选择--</option>
-                        <option value="1">是</option>
-                        <option value="2">否</option>
-                    </select>
-                </label>
-                <label class="Main-sex">
-                    <span>平日是否运动:</span>
-                    <select name="select4" style="zoom:130%">
-                        <option  selected="selected">--请选择--</option>
-                        <option value="1">是</option>
-                        <option value="2">否</option>
-                    </select>
-                </label>
-                <label>
-                    <input type="submit" name="" value="提交" class="button">
-                </label>
-
-            </form>
+            {{ message }}
     </div>
 
 {% endblock center_body %}

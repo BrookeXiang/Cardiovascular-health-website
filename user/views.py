@@ -5,6 +5,9 @@ from django.shortcuts import render,render_to_response
 from django.shortcuts import render, redirect, HttpResponseRedirect, reverse
 from django.core.paginator import Paginator
 from django.http import JsonResponse,HttpResponse
+import numpy as np
+import matplotlib.pyplot as plt
+import nw
 
 from hashlib import sha1
 
@@ -96,7 +99,7 @@ def login_handle(request):  # 没有利用ajax提交表单
             request.session['user_name'] = uname
             request.session['type'] = 'user'
             return red
-        elif s1.hexdigest() == user[0].upwd and vc != verifycode:
+        elif s1.hexdigest() == user[0].u_pwd and vc != verifycode:
             context = {
                 'title': '用户名登陆',
                 'error_name': 0,
@@ -216,52 +219,204 @@ def index(request):
     return render(request, 'user/index.html', context)
 
 def form(request):
-
-    messages.success(request, "用户邮箱与输入邮件不匹配，重置失败！")
+    message = ""
     if request.session.get('type') != 'user':
         return redirect(reverse("user:login"))
     username = request.session.get('user_name')
     user = UserInfo.objects.filter(u_name=username).first()
-    info = HealthInformation.objects.create(i_user=user)
     uage = request.POST.get('age')
-    info.i_age = uage
     usex = request.POST.get('select1')
-    info.i_sex = usex
     ustatur = request.POST.get('statur')
-    info.i_statur = ustatur
     uweight = request.POST.get('weight')
-    info.i_weight = uweight
     usystolicpress = request.POST.get('systolicpress')
-    info.i_systolicpress = usystolicpress
     udiastolicpress = request.POST.get('diastolicpress')
-    info.i_diastolicpress = udiastolicpress
     ucholesterol = request.POST.get('cholesterol')
-    info.i_cholesterol = ucholesterol
     ubloodglucose = request.POST.get('bloodglucose')
-    info.i_bloodglucose = ubloodglucose
     usmoke = request.POST.get('select2')
-    info.i_smoke = usmoke
     udrink = request.POST.get('select3')
-    info.i_drink = udrink
     usport = request.POST.get('select4')
-    info.i_sport = usport
-    info.save()
-    print('--------------------------')
+    if uage == '':
+        message = message + '请输入年龄' + '\n'
+    if usex == '--请选择--':
+        message = message + '请选择性别' + '\n'
+    if ustatur == '':
+        message = message + '请输入身高' + '\n'
+    if uweight == '':
+        message = message + '请输入体重' + '\n'
+    if usystolicpress == '':
+        message = message + '请输入收缩压' + '\n'
+    if udiastolicpress == '':
+        message = message + '请输入舒张压' + '\n'
+    if ucholesterol == '':
+        ucholesterol = '0'
+    if ubloodglucose == '':
+        ubloodglucose = '0'
+    if usmoke == '--请选择--':
+        message = message + '请选择是否吸烟' + '\n'
+    if udrink == '--请选择--':
+        message = message + '请选择是否饮酒' + '\n'
+    if usport == '--请选择--':
+        message = message + '请选择是否运动' + '\n'
+    print('--------------------')
     print(uage)
-    print(usex)
-    print(ustatur)
-    print(uweight)
-    print(usystolicpress)
-    print(udiastolicpress)
-    print(ucholesterol)
-    print(ubloodglucose)
-    print('--------------------------')
+    print('--------------------')
+    if message == '':
+        info = HealthInformation.objects.create(i_user=user)
+        info.i_age = uage
+        info.i_sex = usex
+        info.i_statur = ustatur
+        info.i_weight = uweight
+        info.i_systolicpress = usystolicpress
+        info.i_diastolicpress = udiastolicpress
+        info.i_cholesterol = ucholesterol
+        info.i_bloodglucose = ubloodglucose
+        info.i_drink = udrink
+        info.i_smoke = usmoke
+        info.i_sport = usport
+        info.save()
+        context = {
+            'title': '首页',
+            'message_text': '信息提交成功',
+            'message': message
+        }
 
+        return render(request, 'user/form.html', context)
+
+    else:
+        context = {
+            'title': '首页',
+            'message_text':'信息提交失败',
+            'message': message
+        }
+
+        return render(request, 'user/form.html', context)
+
+def figure(request):
+    username = request.session.get('user_name')
+    healthinfo = HealthInformation.objects.filter(i_user__u_name=username).order_by('-i_time')
+    cishu = []
+    tall = []
+    weight = []
+    shousuo = []
+    shuzhang = []
+    print(healthinfo)
+
+    for i, info in enumerate(healthinfo):
+        cishu.append(i)
+        tall.insert(0,float(info.i_statur))
+        weight.insert(0, float(info.i_weight))
+        shousuo.insert(0,float(info.i_systolicpress))
+        shuzhang.insert(0,float(info.i_diastolicpress))
+        if i == 10:
+            break
+
+    plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+    plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
+    plt.figure()
+    for i in range(len(cishu)):
+        plt.annotate(str(tall[i]), xy=(cishu[i], tall[i]), xytext=(cishu[i], tall[i] + 0.05))
+    plt.plot(cishu, tall, marker='*', color='b', label='身高')
+    # plt.plot(cishu, weight, marker='*', color='b', label='体重')
+    # plt.plot(cishu, shousuo, marker='*', color='b', label='收缩压')
+    # plt.plot(cishu, shuzhang, marker='*', color='b', label='舒张压')
+
+    # 显示图例（使绘制生效）
+    plt.legend()
+
+    # 横坐标名称
+    plt.xlabel('上报次数')
+    plt.xticks(cishu)
+
+    # 纵坐标名称
+    plt.ylabel('数值')
+
+
+    plt.savefig('./static/images/image.png')
+
+    plt.figure()
+    for i in range(len(cishu)):
+        plt.annotate(str(tall[i]), xy=(cishu[i], weight[i]), xytext=(cishu[i], weight[i] + 0.05))
+    plt.plot(cishu, weight, marker='*', color='b', label='体重')
+    # 显示图例（使绘制生效）
+    plt.legend()
+    # 横坐标名称
+    plt.xlabel('上报次数')
+    plt.xticks(cishu)
+    # 纵坐标名称
+    plt.ylabel('数值')
+    plt.savefig('./static/images/image1.png')
+
+    plt.figure()
+    for i in range(len(cishu)):
+        plt.annotate(str(tall[i]), xy=(cishu[i], shousuo[i]), xytext=(cishu[i], shousuo[i] + 0.05))
+    plt.plot(cishu, shousuo, marker='*', color='b', label='收缩压')
+    # 显示图例（使绘制生效）
+    plt.legend()
+    # 横坐标名称
+    plt.xlabel('上报次数')
+    # 纵坐标名称
+    plt.ylabel('数值')
+    plt.savefig('./static/images/image2.png')
+
+    plt.figure()
+    for i in range(len(cishu)):
+        plt.annotate(str(tall[i]), xy=(cishu[i], shuzhang[i]), xytext=(cishu[i], shuzhang[i] + 0.05))
+    plt.plot(cishu, shuzhang, marker='*', color='b', label='舒张压')
+    # 显示图例（使绘制生效）
+    plt.legend()
+    # 横坐标名称
+    plt.xlabel('上报次数')
+    plt.xticks(cishu)
+    # 纵坐标名称
+    plt.ylabel('数值')
+    plt.savefig('./static/images/image3.png')
 
     context = {
-        'title': '首页',
+        'title': '用户名登陆',
+        'error_name': 1,
+        'error_pwd': 0,
+        'error_vc': 0,
+        'tall': tall,
+        'weight': weight,
+        'shuosuo': shousuo,
+        'shuzhang': shuzhang,
     }
+    return render(request, 'user/figure.html', context)
 
-    return render(request, 'user/index.html', context)
+def predict(request):
+    list = []
+    if request.session.get('type') != 'user':
+        return redirect(reverse("user:login"))
+    username = request.session.get('user_name')
+    user = UserInfo.objects.filter(u_name=username).first()
+    healthinfo = HealthInformation.objects.filter(i_user__u_name=username).order_by('-i_time').first()
+    list.append(1)
+    list.append(float(healthinfo.i_age))
+    list.append(float(healthinfo.i_sex))
+    list.append(float(healthinfo.i_statur))
+    list.append(float(healthinfo.i_weight))
+    list.append(float(healthinfo.i_systolicpress))
+    list.append(float(healthinfo.i_diastolicpress))
+    list.append(float(healthinfo.i_smoke))
+    list.append(float(healthinfo.i_drink))
+    list.append(float(healthinfo.i_sport))
+
+    print('---------------------')
+    print(list)
+    print('---------------------')
+
+    result = nw.predict(list)
+
+    if result == True:
+        context = {
+            'message': '您患病风险较高，建议进行全面体检',
+        }
+        return render(request, 'user/predict.html', context)
+    else:
+        context = {
+            'message': '恭喜！您患病风险较低',
+        }
+        return render(request, 'user/predict.html', context)
+
 
 

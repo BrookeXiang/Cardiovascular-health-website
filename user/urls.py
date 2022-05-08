@@ -19,6 +19,8 @@ urlpatterns = [
     url(r'^findpwdView/$', findpwdView,name="findpwdView"),
     url(r'^verify_show/$', verify_show,name="verify_show"),
     url(r'^form/$', form, name="form"),
+    url(r'^figure/$', figure, name="figure"),
+    url(r'^predict/$', predict, name="predict"),
     url(r'^verifycode/$', viewsUtil.verify_code,name="verifycode"),
     url('^$', index, name="index"),
     re_path('^media/(?P<path>.*)/$',serve,{'document_root':settings.MEDIA_ROOT}),

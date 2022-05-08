@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>倒计时5秒跳转页面</title>
+    </head>
+    <body>
+    {{ message_text }}，<span id="zhuan" style="color: #0022ff; font-size: 20px;">3</span>秒后跳转页面!<br />
+    {{ message }}
+    </body>
+    <script type="text/javascript">
+        var time=2;
+        var timer = setInterval(function(){
+            var str = document.getElementById("zhuan");
+            if(time>=1){
+                str.innerHTML=time;
+                time--;
+            }else{
+                clearInterval(timer);
+                location.href = "http://127.0.0.1:8000/";
+            }
+        },1000)
+    </script>
+</html>

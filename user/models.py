@@ -21,7 +21,7 @@ class UserInfo(models.Model):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.uname
+        return self.u_name
 
 class HealthInformation(models.Model):
 
@@ -44,5 +44,5 @@ class HealthInformation(models.Model):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.cusername1
+        return self.i_age
 
